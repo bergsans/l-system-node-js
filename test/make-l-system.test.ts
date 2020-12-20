@@ -1,5 +1,5 @@
 import { LRules } from '../typings/main';
-import { makeLSystem } from '../src/make-lsys';
+import { makeLSystem } from '../src/make-l-system';
 
 const rules1:LRules = new Map().set('A', 'B').set('B', 'AB');
 const rules2:LRules = new Map().set('F', 'F-F++F-F');

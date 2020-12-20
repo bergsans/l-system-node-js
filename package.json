@@ -9,7 +9,7 @@
   "scripts": {
     "generate": "./start-script",
     "test": "jest",
-    "build": "tsc src/** --outDir dist"
+    "build": "tsc src/** --downlevelIteration --outDir dist"
   },
   "devDependencies": {
     "@types/jest": "^26.0.19",

@@ -1,21 +1,35 @@
-import { LScreen, Axiom, State, AxiomHandler, Instruction } from '../typings/main';
-import { head, tail, id } from './helpers';
+import {
+	LScreen,
+	Axiom,
+	State,
+	LRulesInstructions
+} from '../typings/main';
+import { id } from './helpers';
+
+const transformCharacter = (
+	instructions:LRulesInstructions
+) => (axiom: Axiom) => (state:State) => (instructions.get(axiom) ?? id)(state);
+
+const transformReducer = (
+	instructions:LRulesInstructions
+) => (acc:State, v:Axiom) => transformCharacter(instructions)(v)(acc);
 
 export const createLSystemVisualization = (
 	axiom:Axiom,
 	state:State,
-	interpretation:Map<Instruction, AxiomHandler>
-):LScreen => {
-	if(axiom.length === 0) return state.screen;
-	const getExecution = interpretation.get(head(axiom)) ?? id;
-	const nextState = getExecution(state);
-	return createLSystemVisualization(tail(axiom), nextState, interpretation);
-};
+	instructions:LRulesInstructions
+):LScreen => axiom
+	.split('')
+	.reduce(transformReducer(instructions), state)
+	.screen;
 
-export const sanitizeLScreen = (
-	screen: LScreen
-):string => {
-	const withoutBlankLns = screen.filter((ln) => !ln.every((c) => c === ' '));
-	const joined = withoutBlankLns.map((ln) => ln.join('').trimEnd()).join('\n');
-	return joined;
-};
+const fixLn = (ln:string[]) => ln.join('').trimEnd();
+
+const isCharacterBlankSpace = (char:string) => char === ' ';
+
+const rmBlankLns = (ln:string[]) => !ln.every(isCharacterBlankSpace);
+
+export const sanitizeLScreen = (screen:LScreen):string => screen
+	.filter(rmBlankLns)
+	.map(fixLn)
+	.join('\n');

@@ -1,5 +1,5 @@
-import { makeLSystem } from '../src/make-lsys';
-import { interpretKochLSystem, quadraticKochIsland } from '../src/koch-curves';
+import { makeLSystem } from '../src/make-l-system';
+import { interpretKochLSystem, quadraticKochIsland } from '../src/koch-transformation-rules';
 import { sanitizeLScreen, createLSystemVisualization } from '../src/format-output';
 import { Direction } from '../typings/main';
 import { makeLScreen } from '../src/helpers';

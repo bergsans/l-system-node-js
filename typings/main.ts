@@ -6,7 +6,7 @@ export type AxiomHandler = (s:State) => State;
 
 export type LRules = Map<Axiom, Axiom>;
 
-export type LRulesInterpretation = Map<Instruction, AxiomHandler>;
+export type LRulesInstructions = Map<Instruction, AxiomHandler>;
 
 export type Axiom = string;
 
