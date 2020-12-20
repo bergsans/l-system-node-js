@@ -1,0 +1,9 @@
+#!/bin/bash
+
+yarn build && \
+node dist/src/index.js --extensions ".ts" > output.txt && \
+convert -size 480x1900 xc:white -font "FreeMono" -pointsize 6 -fill black \
+-annotate +6+6 "@output.txt" unclean-output.png  && \
+convert unclean-output.png -resize 800x1900! output.png && \
+rm unclean-output.png && \
+echo "Generated output.png"

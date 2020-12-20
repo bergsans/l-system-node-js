@@ -1,25 +1,23 @@
-export type LRules = Map<string, string>;
-
-type LSystem = string;
-
-const inc = (x:number) => x + 1;
+import { Axiom, LRules, Instruction } from '../typings/main';
+import { inc } from './helpers';
 
 const nextGeneration = (rules:LRules) => (
-  acc:LSystem,
-  str:LSystem
+	acc:Axiom,
+	str:Axiom
 ) => acc.concat(rules.get(str) ?? str);
 
-const makeGeneration = (prevGenerations:LSystem, rules:LRules) =>
+const makeGeneration = (prevGenerations:Axiom, rules:LRules) =>
 	prevGenerations
 		.split('')
 		.reduce(nextGeneration(rules), '');
 
 export const makeLSystem = (
-  generations:number = 0,
-  axiom:LSystem = '',
-  lrules:LRules
-) => {
-	const mLS = (generation:number = 0, newAxiom:LSystem = ''): LSystem =>
+	generations = 0,
+	axiom:Axiom = '',
+	lrules:LRules
+):Instruction => {
+	if(generations === 0) return axiom;
+	const mLS = (generation = 0, newAxiom:Axiom = ''):Axiom =>
 		generation === generations
 			? newAxiom
 			: generation === 0
