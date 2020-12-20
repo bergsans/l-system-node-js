@@ -8,8 +8,8 @@ export const createLSystemVisualization = (
 ):LScreen => {
 	if(axiom.length === 0) return state.screen;
 	const getExecution = interpretation.get(head(axiom)) ?? id;
-	const newState = getExecution(state);
-	return createLSystemVisualization(tail(axiom), newState, interpretation);
+	const nextState = getExecution(state);
+	return createLSystemVisualization(tail(axiom), nextState, interpretation);
 };
 
 export const sanitizeLScreen = (

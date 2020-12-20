@@ -25,12 +25,19 @@ const setPoint = (
 	)
 );
 
+const isDirectionsEqual = (dir1:Direction) => (dir2:Direction) => dir1 === dir2;
+
 export const changeDirection = (
 	currentDirection:Direction,
 	rotate: Turn
 ):Direction => {
-	const directions = [Direction.North, Direction.East, Direction.South, Direction.West];
-	const index = directions.findIndex((direction) => direction === currentDirection);
+	const directions = [
+		Direction.North,
+		Direction.East,
+		Direction.South,
+		Direction.West
+	];
+	const index = directions.findIndex(isDirectionsEqual(currentDirection));
 	if(rotate === 'R' && index === 3) return Direction.North;
 	if(rotate === 'R') return directions[index + 1];
 	if(rotate === 'L' && index === 0) return Direction.West;

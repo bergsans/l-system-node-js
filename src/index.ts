@@ -2,7 +2,13 @@ import { Direction } from '../typings/main';
 import { makeLSystem } from './make-lsys';
 import { makeLScreen } from './helpers';
 import { createLSystemVisualization, sanitizeLScreen } from './format-output';
-import { kochCurve1, kochCurve2, kochCurve3, interpretKochLSystem, quadraticKochIsland } from './koch-curves';
+import {
+	kochCurve1,
+	kochCurve2,
+	kochCurve3,
+	interpretKochLSystem,
+	quadraticKochIsland
+} from './koch-curves';
 
 const interpretQuadraticKochIslandGame = makeLSystem(3, 'F-F-F-F', quadraticKochIsland);
 const output1 = sanitizeLScreen(
