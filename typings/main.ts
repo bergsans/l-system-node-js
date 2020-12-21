@@ -30,6 +30,10 @@ export interface State {
   screen: LScreen;
 }
 
+export type Borders = {
+  [key in Direction]?: [string, string];
+}
+
 export type DirectionModifiers = {
   [key in Direction]: [number, number];
 };

@@ -1,4 +1,4 @@
-import { LRules, Direction } from '../typings/main';
+import { Direction } from '../typings/main';
 import { makeLSystem } from './make-l-system';
 import { makeLScreen } from './helpers';
 import { createLSystemVisualization, sanitizeLScreen } from './format-output';
@@ -10,9 +10,18 @@ import {
 	quadraticKochIsland
 } from './koch-transformation-rules';
 
-const games:LRules[] = [ quadraticKochIsland, kochCurve1, kochCurve2, kochCurve3 ];
-for(const [index, game] of games.entries()) {
-	const interpretation = makeLSystem(index === 0 ? 3 : 4, 'F-F-F-F', game);
+const transformationRules = [
+	{ transformationRule: quadraticKochIsland, nGenerations: 3 },
+	{ transformationRule: kochCurve1, nGenerations: 4 },
+	{ transformationRule: kochCurve2, nGenerations: 4 },
+	{ transformationRule: kochCurve3, nGenerations: 4 },
+];
+for(const { transformationRule, nGenerations } of transformationRules) {
+	const interpretation = makeLSystem(
+		nGenerations,
+		'F-F-F-F',
+		transformationRule
+	);
 	const output = sanitizeLScreen(
 		createLSystemVisualization(
 			interpretation,
