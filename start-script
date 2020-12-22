@@ -3,7 +3,7 @@
 yarn build && \
 echo "Starting generating patterns..." && \
 echo "This can take a bit of time." && \
-node dist/src/index.js --extensions ".ts" > output.txt && \
+node dist/src/index.js > output.txt && \
 convert -size 650x3000 xc:white -font "FreeMono" -pointsize 6 -fill black \
 -annotate +6+6 "@output.txt" unclean-output.png  && \
 convert unclean-output.png -resize 1000x3000! output.png && \
