@@ -1,4 +1,4 @@
-import { LRules } from '../typings/main';
+import { LRules } from '../typings/typings';
 import { makeLSystem } from '../src/make-l-system';
 
 const rules1:LRules = new Map().set('A', 'B').set('B', 'AB');

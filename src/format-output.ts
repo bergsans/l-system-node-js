@@ -1,4 +1,4 @@
-import { LScreen, Axiom, State, LRulesInstructions } from '../typings/main';
+import { LScreen, Axiom, State, LRulesInstructions } from '../typings/typings';
 import { id } from './helpers';
 
 const transformCharacter = (

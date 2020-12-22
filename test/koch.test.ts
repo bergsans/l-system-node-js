@@ -1,7 +1,7 @@
 import { makeLSystem } from '../src/make-l-system';
 import { interpretKochLSystem, quadraticKochIsland } from '../src/koch-transformation-rules';
 import { sanitizeLScreen, createLSystemVisualization } from '../src/format-output';
-import { Direction } from '../typings/main';
+import { Direction } from '../typings/typings';
 import { makeLScreen } from '../src/helpers';
 
 describe('QuadraticKochCurve', () => {
@@ -22,8 +22,8 @@ describe('QuadraticKochCurve', () => {
 			)
 		);
 		const [_, ...expectedOutput] = `
-   ██
-   ██`.split('\n');
+   ┏┓
+   ━┛`.split('\n');
 		const sanitizedexpectedOutput = expectedOutput.join('\n');
 		expect(quadraticKochIslandOutput).toEqual(sanitizedexpectedOutput);
 	});
@@ -44,13 +44,13 @@ describe('QuadraticKochCurve', () => {
 			)
 		);
 		const [_, ...expectedOutput] = `
-                      ██
-                    █████
-                   ██████
-                   ███ ███
-                    ██████
-                    █████
-                     ██`.split('\n');
+                      ┏┓
+                    ┏┓┃┗┓
+                   ┏┛┗┛┏┛
+                   ┗━┓ ┗━┓
+                    ┏┛┏┓┏┛
+                    ━┓┃┗┛
+                     ┗┛`.split('\n');
 		const sanitizedexpectedOutput = expectedOutput.join('\n');
 		expect(quadraticKochIslandOutput).toEqual(sanitizedexpectedOutput);
 	});

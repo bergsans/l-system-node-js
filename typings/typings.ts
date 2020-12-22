@@ -13,11 +13,19 @@ export type Axiom = string;
 export type Instruction = string;
 
 export enum Direction {
-  North = 'N',
-  East = 'E',
-  South = 'S',
-  West = 'W'
+  North,
+  East,
+  South,
+  West
 }
+
+type SubBorders = {
+  [key in Direction]?: string;
+};
+
+export type Borders = {
+  [key in Direction]: SubBorders;
+};
 
 export interface Point {
   y: number;

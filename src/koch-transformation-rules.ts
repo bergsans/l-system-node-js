@@ -1,4 +1,4 @@
-import { LRulesInstructions, State, LRules } from '../typings/main';
+import { LRulesInstructions, State, LRules } from '../typings/typings';
 import { turn, move } from './koch-instruction-rules';
 
 export const quadraticKochIsland:LRules = new Map()

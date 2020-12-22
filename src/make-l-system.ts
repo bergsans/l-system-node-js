@@ -1,4 +1,4 @@
-import { Axiom, LRules, Instruction } from '../typings/main';
+import { Axiom, LRules, Instruction } from '../typings/typings';
 import { inc } from './helpers';
 
 const nextGeneration = (rules:LRules) => (

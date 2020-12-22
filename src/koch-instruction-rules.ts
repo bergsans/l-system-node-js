@@ -1,12 +1,6 @@
-import { State, Axiom, Turn, Direction, DirectionModifiers } from '../typings/main';
+import { State, Axiom, Turn, Direction } from '../typings/typings';
+import { directions, directionModifiers, borders } from '../constants/constants';
 import { putTraceAt, inc, dec } from './helpers';
-
-const directionModifiers:DirectionModifiers = {
-	[Direction.North]: [0,-1],
-	[Direction.East]:  [1, 0],
-	[Direction.South]: [0, 1],
-	[Direction.West]:  [-1,0]
-};
 
 export const move = (state:State, mv:Axiom):State => {
 	const { point, direction, screen } = state;
@@ -19,32 +13,34 @@ export const move = (state:State, mv:Axiom):State => {
 		...state,
 		point: { ...newPoint },
 		screen: mv === 'F'
-			? putTraceAt(newPoint, screen)
+			? putTraceAt(
+				newPoint,
+				screen,
+				direction === Direction.North || direction === Direction.South
+					? '┃'
+					: '━'
+			)
 			: screen
 	};
 };
 
 const isDirsEq = (a:Direction) => (b:Direction) => a === b;
 
-const directions = [
-	Direction.North,
-	Direction.East,
-	Direction.South,
-	Direction.West
-];
-
-export const changeDirection = (
-	currentDirection:Direction,
+export const turn = (
+	state:State,
 	rotate: Turn
-):Direction => {
-	const index = directions.findIndex(isDirsEq(currentDirection));
-	if(rotate === 'R' && index === 3) return Direction.North;
-	if(rotate === 'R') return directions[inc(index)];
-	if(rotate === 'L' && index === 0) return Direction.West;
-	else return directions[dec(index)];
+):State => {
+	const { screen, point } = state;
+	const index = directions.findIndex(isDirsEq(state.direction));
+	let direction;
+	if(rotate === 'R' && index === 3) direction = Direction.North;
+	else if(rotate === 'L' && index === 0) direction = Direction.West;
+	else direction = rotate === 'R'
+		? directions[inc(index)]
+		: directions[dec(index)];
+	return {
+		...state,
+		direction,
+		screen: putTraceAt(point, screen, borders[state.direction][direction])
+	};
 };
-
-export const turn = (state:State, rotate:Turn):State => ({
-	...state,
-	direction: changeDirection(state.direction, rotate)
-});

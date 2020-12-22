@@ -1,4 +1,4 @@
-import { Direction } from '../typings/main';
+import { Direction } from '../typings/typings';
 import { makeLSystem } from './make-l-system';
 import { makeLScreen } from './helpers';
 import { createLSystemVisualization, sanitizeLScreen } from './format-output';

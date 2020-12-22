@@ -1,4 +1,4 @@
-import { Point, LScreen } from '../typings/main';
+import { Point, LScreen } from '../typings/typings';
 
 export const id = <T>(v:T):T => v;
 
