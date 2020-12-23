@@ -2,7 +2,8 @@ import { makeLSystem } from '../src/make-l-system';
 import { interpretKochLSystem, quadraticKochIsland } from '../src/koch-transformation-rules';
 import { sanitizeLScreen, createLSystemVisualization } from '../src/format-output';
 import { Direction } from '../typings/typings';
-import { makeLScreen } from '../src/helpers';
+import { directions } from '../constants/constants';
+import { directionHandler, makeLScreen } from '../src/helpers';
 
 describe('QuadraticKochCurve', () => {
 	test('0 generations', () => {
@@ -16,7 +17,8 @@ describe('QuadraticKochCurve', () => {
 						y: 3
 					},
 					direction: Direction.North,
-					screen: makeLScreen(10, 10)
+					screen: makeLScreen(10, 10),
+					directionHandler: directionHandler(directions)
 				},
 				interpretKochLSystem
 			)
@@ -38,7 +40,8 @@ describe('QuadraticKochCurve', () => {
 						y: 15
 					},
 					direction: Direction.North,
-					screen: makeLScreen(40, 30)
+					screen: makeLScreen(40, 30),
+					directionHandler: directionHandler(directions)
 				},
 				interpretKochLSystem
 			)

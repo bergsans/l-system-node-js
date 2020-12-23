@@ -1,6 +1,6 @@
 import { State, Axiom, Turn, Direction } from '../typings/typings';
-import { directions, directionModifiers, borders } from '../constants/constants';
-import { putTraceAt, inc, dec } from './helpers';
+import { verticalLine, horizontalLine, directionModifiers, lns } from '../constants/constants';
+import { putTraceAt } from './helpers';
 
 export const move = (state:State, mv:Axiom):State => {
 	const { point, direction, screen } = state;
@@ -17,30 +17,24 @@ export const move = (state:State, mv:Axiom):State => {
 				newPoint,
 				screen,
 				direction === Direction.North || direction === Direction.South
-					? '┃'
-					: '━'
+					? verticalLine
+					: horizontalLine
 			)
 			: screen
 	};
 };
 
-const isDirsEq = (a:Direction) => (b:Direction) => a === b;
-
 export const turn = (
 	state:State,
 	rotate: Turn
 ):State => {
-	const { screen, point } = state;
-	const index = directions.findIndex(isDirsEq(state.direction));
-	let direction;
-	if(rotate === 'R' && index === 3) direction = Direction.North;
-	else if(rotate === 'L' && index === 0) direction = Direction.West;
-	else direction = rotate === 'R'
-		? directions[inc(index)]
-		: directions[dec(index)];
+	const { screen, directionHandler, point } = state;
+	const direction = rotate === 'R'
+		? directionHandler.next()
+		: directionHandler.prev();
 	return {
 		...state,
 		direction,
-		screen: putTraceAt(point, screen, borders[state.direction][direction])
+		screen: putTraceAt(point, screen, lns[state.direction][direction])
 	};
 };

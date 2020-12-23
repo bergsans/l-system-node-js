@@ -1,4 +1,4 @@
-import { Borders, Direction, DirectionModifiers } from '../typings/typings';
+import { Lines, Direction, DirectionModifiers } from '../typings/typings';
 
 export const directions = [
 	Direction.North,
@@ -14,21 +14,35 @@ export const directionModifiers:DirectionModifiers = {
 	[Direction.West]:  [-1,0]
 };
 
-export const borders:Borders = {
+export const verticalLine = '┃';
+
+export const horizontalLine = '━';
+
+export const leftDownBorder = '┗';
+
+export const leftUpBorder = '┓';
+
+export const rightDownBorder = '┛';
+
+export const rightUpBorder = '┏';
+
+export const empty = ' ';
+
+export const lns:Lines = {
 	[Direction.North]: {
-		[Direction.West]: '┓',
-		[Direction.East]: '┏'
+		[Direction.West]: leftUpBorder,
+		[Direction.East]: rightUpBorder,
 	},
 	[Direction.East]: {
-		[Direction.North]: '┛',
-		[Direction.South]: '┓'
+		[Direction.North]: rightDownBorder,
+		[Direction.South]: leftUpBorder
 	},
 	[Direction.South]: {
-		[Direction.West]: '┛',
-		[Direction.East]: '┗'
+		[Direction.West]: rightDownBorder,
+		[Direction.East]: leftDownBorder
 	},
 	[Direction.West]: {
-		[Direction.North]: '┗',
-		[Direction.South]: '┏'
+		[Direction.North]: leftDownBorder,
+		[Direction.South]: rightUpBorder
 	},
 };

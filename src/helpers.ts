@@ -1,4 +1,4 @@
-import { Point, LScreen } from '../typings/typings';
+import { DirFns, Point, LScreen } from '../typings/typings';
 
 export const id = <T>(v:T):T => v;
 
@@ -19,7 +19,7 @@ const isPointsEq = (
 export const putTraceAt = (
 	point: Point,
 	screen: LScreen,
-	symbol = '█'
+	symbol = 'E'
 ):LScreen => screen.map(
 	(ln:string[], y:number) => ln.map(
 		(currPoint:string, x:number) => isPointsEq(point, {x,y})
@@ -27,3 +27,21 @@ export const putTraceAt = (
 			: currPoint
 	)
 );
+
+export const directionHandler = <T extends unknown>(dirs:T[]):DirFns<T> => {
+	let i = 0;
+	return {
+		next() {
+			i = i + 1 >= dirs.length
+				? 0
+				: i + 1;
+			return dirs[i];
+		},
+		prev() {
+			i = i - 1 < 0
+				? dirs.length - 1
+				: i - 1;
+			return dirs[i];
+		}
+	};
+};

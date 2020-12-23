@@ -19,12 +19,12 @@ export enum Direction {
   West
 }
 
-type SubBorders = {
+type SubLines = {
   [key in Direction]?: string;
 };
 
-export type Borders = {
-  [key in Direction]: SubBorders;
+export type Lines = {
+  [key in Direction]: SubLines;
 };
 
 export interface Point {
@@ -36,8 +36,14 @@ export interface State {
   point: Point;
   direction: Direction;
   screen: LScreen;
+  directionHandler: DirFns<Direction>;
 }
 
 export type DirectionModifiers = {
   [key in Direction]: [number, number];
 };
+
+export interface DirFns<T> {
+  next: () => T;
+  prev: () => T;
+}

@@ -1,6 +1,6 @@
 import { Direction } from '../typings/typings';
 import { makeLSystem } from './make-l-system';
-import { makeLScreen } from './helpers';
+import { directionHandler, makeLScreen } from '../src/helpers';
 import { createLSystemVisualization, sanitizeLScreen } from './format-output';
 import {
 	kochCurve1,
@@ -9,6 +9,7 @@ import {
 	interpretKochLSystem,
 	quadraticKochIsland
 } from './koch-transformation-rules';
+import { directions } from '../constants/constants';
 
 const transformationRules = [
 	{ transformationRule: quadraticKochIsland, nGenerations: 3 },
@@ -31,7 +32,8 @@ for(const { transformationRule, nGenerations } of transformationRules) {
 					y: 130
 				},
 				direction: Direction.North,
-				screen: makeLScreen(160, 300)
+				screen: makeLScreen(160, 300),
+				directionHandler: directionHandler(directions)
 			},
 			interpretKochLSystem
 		)
