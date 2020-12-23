@@ -13,10 +13,10 @@ export type Axiom = string;
 export type Instruction = string;
 
 export enum Direction {
-  North,
-  East,
-  South,
-  West
+  N,
+  E,
+  S,
+  W
 }
 
 type SubLines = {
@@ -34,16 +34,17 @@ export interface Point {
 
 export interface State {
   point: Point;
-  direction: Direction;
   screen: LScreen;
-  directionHandler: DirFns<Direction>;
+  dir: DirFns;
 }
 
 export type DirectionModifiers = {
   [key in Direction]: [number, number];
 };
 
-export interface DirFns<T> {
-  next: () => T;
-  prev: () => T;
+export interface DirFns {
+  next: () => Direction;
+  prev: () => Direction;
+  curr: () => Direction;
+  getPos: () => Point;
 }

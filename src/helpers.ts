@@ -1,4 +1,4 @@
-import { DirFns, Point, LScreen } from '../typings/typings';
+import { DirectionModifiers, Direction, DirFns, Point, LScreen } from '../typings/typings';
 
 export const id = <T>(v:T):T => v;
 
@@ -28,20 +28,35 @@ export const putTraceAt = (
 	)
 );
 
-export const directionHandler = <T extends unknown>(dirs:T[]):DirFns<T> => {
-	let i = 0;
+export const directionHandler = (
+	currDir:Direction,
+	dirs:Direction[],
+	mods:DirectionModifiers
+):DirFns => {
+	let i = dirs.findIndex((dir) => dir === currDir) ?? 0;
+	const last = dirs.length - 1;
+	const first = 0;
 	return {
 		next() {
-			i = i + 1 >= dirs.length
-				? 0
-				: i + 1;
+			i = inc(i) > last
+				? first
+				: inc(i);
 			return dirs[i];
 		},
 		prev() {
-			i = i - 1 < 0
-				? dirs.length - 1
-				: i - 1;
+			i = dec(i) < first
+				? last
+				: dec(i);
 			return dirs[i];
+		},
+		curr() {
+			return dirs[i];
+		},
+		getPos() {
+			return {
+				x: mods[dirs[i]][0],
+				y: mods[dirs[i]][1]
+			};
 		}
 	};
 };

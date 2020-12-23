@@ -1,48 +1,48 @@
 import { Lines, Direction, DirectionModifiers } from '../typings/typings';
 
-export const directions = [
-	Direction.North,
-	Direction.East,
-	Direction.South,
-	Direction.West
+export const directions:Direction[] = [
+	Direction.N,
+	Direction.E,
+	Direction.S,
+	Direction.W
 ];
 
 export const directionModifiers:DirectionModifiers = {
-	[Direction.North]: [0,-1],
-	[Direction.East]:  [1, 0],
-	[Direction.South]: [0, 1],
-	[Direction.West]:  [-1,0]
+	[Direction.N]: [0,-1],
+	[Direction.E]:  [1, 0],
+	[Direction.S]: [0, 1],
+	[Direction.W]:  [-1,0]
 };
 
 export const verticalLine = '┃';
 
 export const horizontalLine = '━';
 
-export const leftDownBorder = '┗';
+export const leftDownLine = '┗';
 
-export const leftUpBorder = '┓';
+export const leftUpLine = '┓';
 
-export const rightDownBorder = '┛';
+export const rightDownLine = '┛';
 
-export const rightUpBorder = '┏';
+export const rightUpLine = '┏';
 
 export const empty = ' ';
 
 export const lns:Lines = {
-	[Direction.North]: {
-		[Direction.West]: leftUpBorder,
-		[Direction.East]: rightUpBorder,
+	[Direction.N]: {
+		[Direction.W]: leftUpLine,
+		[Direction.E]: rightUpLine,
 	},
-	[Direction.East]: {
-		[Direction.North]: rightDownBorder,
-		[Direction.South]: leftUpBorder
+	[Direction.E]: {
+		[Direction.N]: rightDownLine,
+		[Direction.S]: leftUpLine
 	},
-	[Direction.South]: {
-		[Direction.West]: rightDownBorder,
-		[Direction.East]: leftDownBorder
+	[Direction.S]: {
+		[Direction.W]: rightDownLine,
+		[Direction.E]: leftDownLine
 	},
-	[Direction.West]: {
-		[Direction.North]: leftDownBorder,
-		[Direction.South]: rightUpBorder
+	[Direction.W]: {
+		[Direction.N]: leftDownLine,
+		[Direction.S]: rightUpLine
 	},
 };

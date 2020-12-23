@@ -1,5 +1,5 @@
 import { LRulesInstructions, State, LRules } from '../typings/typings';
-import { turn, move } from './koch-instruction-rules';
+import { turn, move } from './interpret-instructions';
 
 export const quadraticKochIsland:LRules = new Map()
 	.set('F', 'F-F+F+FF-F-F+F');

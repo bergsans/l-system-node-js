@@ -24,7 +24,6 @@ const isCharacterBlankSpace = (char:string) => char === ' ';
 
 const rmBlankLns = (ln:string[]) => !ln.every(isCharacterBlankSpace);
 
-// use transduce?
 export const sanitizeLScreen = (screen:LScreen):string => screen
 	.filter(rmBlankLns)
 	.map(fixLn)

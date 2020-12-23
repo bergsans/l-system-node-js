@@ -8,19 +8,19 @@ import {
 	kochCurve3,
 	interpretKochLSystem,
 	quadraticKochIsland
-} from './koch-transformation-rules';
-import { directions } from '../constants/constants';
+} from './koch-transformation-and-instruction-rules';
+import { directionModifiers, directions } from '../constants/constants';
 
 const transformationRules = [
-	{ transformationRule: quadraticKochIsland, nGenerations: 3 },
-	{ transformationRule: kochCurve1, nGenerations: 4 },
-	{ transformationRule: kochCurve2, nGenerations: 4 },
-	{ transformationRule: kochCurve3, nGenerations: 4 },
+	{ transformationRule: quadraticKochIsland, nGenerations: 3 , initState: 'F-F-F-F'},
+	{ transformationRule: kochCurve1, nGenerations: 4, initState: 'F-F-F-F'},
+	{ transformationRule: kochCurve2, nGenerations: 4, initState: 'F-F-F-F' },
+	{ transformationRule: kochCurve3, nGenerations: 4, initState: 'F-F-F-F' },
 ];
-for(const { transformationRule, nGenerations } of transformationRules) {
+for(const { transformationRule, nGenerations, initState } of transformationRules) {
 	const interpretation = makeLSystem(
 		nGenerations,
-		'F-F-F-F',
+		initState,
 		transformationRule
 	);
 	const output = sanitizeLScreen(
@@ -31,9 +31,8 @@ for(const { transformationRule, nGenerations } of transformationRules) {
 					x: 25,
 					y: 130
 				},
-				direction: Direction.North,
 				screen: makeLScreen(160, 300),
-				directionHandler: directionHandler(directions)
+				dir: directionHandler(Direction.N, directions, directionModifiers)
 			},
 			interpretKochLSystem
 		)
